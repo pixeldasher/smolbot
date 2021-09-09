@@ -4,7 +4,7 @@ const { token } = require("./config.json");
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-if (process.argv.some(arg => ["-d", "--deploy-commads"].includes(arg))) {
+if (process.argv.some(arg => ["-d", "--deploy-commands"].includes(arg))) {
 	const deploy = require("./deploy-commands.js")
 	deploy.execute();
 }
