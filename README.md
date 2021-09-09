@@ -11,6 +11,6 @@ This bot's purpose is to allow users to play with fun commands – so nothing to
 
 ## To-dos
 Here are the things I still have to do:
-* Make this bot functional
+* Make this bot functional *(important?)*
 * Create some super funny commands
 * Convince my friend to add this bot to their server
