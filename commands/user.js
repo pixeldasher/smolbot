@@ -1,10 +1,12 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+module.exports.execute = async (interaction) => {
 
-module.exports = {
-	data: new SlashCommandBuilder()
-		.setName("user")
-		.setDescription("Replies with user info!"),
-	async execute(interaction) {
-		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
-	},
-};
+	await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+
+}
+
+module.exports.config = {
+	name:			"user",
+	description:	"Replies with user info!",
+	options:		[],	// todo
+	type:			"",	// default: CHAT_INPUT => Slash command,    USER => right-click user,    MESSAGE => right-click message
+}
