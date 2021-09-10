@@ -1,0 +1,8 @@
+Usage:
+    node smolbot.js <options>
+
+Options:
+    -d, --deploy-commands       Deploys commands on startup
+    -h, --help                  Shows this help page
+    -a, --author                Displays the author's name(s)
+

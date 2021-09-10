@@ -1,12 +1,12 @@
 module.exports.execute = async (interaction) => {
 
-	await interaction.reply("Pong!");
+	await interaction.reply("Blub!");
 
 };
 
 module.exports.config = {
-	name:			"ping",
-	description:	"Replies with Pong!",
+	name:			"blub",
+	description:	"Replies with blub!",
 	options:		[],	// todo
 	type:			"",	// default: CHAT_INPUT => Slash command,    USER => right-click user,    MESSAGE => right-click message
 };

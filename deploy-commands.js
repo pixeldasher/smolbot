@@ -28,8 +28,8 @@ module.exports.execute = async () => {
 			{ body: commands },
 		);
 
-		console.log('\x1b[35m%s\x1b[0m%s', "[LOGS] ", `Successfully registered ${commands.length} application commands.`);
+		console.log("\x1b[35m%s\x1b[0m%s", "[LOGS] ", `Successfully registered ${commands.length} application commands.`);
 	} catch (error) {
 		console.error(error);
 	}
-}
+};
