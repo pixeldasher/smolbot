@@ -1,11 +1,19 @@
 module.exports.execute = async (client, interaction, args) => {
-	let activity = args[0].value;
-	let type = args[1].value;
-	let status = args[2].value;
-	let url = args[3].value;
+	console.log(args);
 
-	await client.user.setPresence({ activities: [{ name: activity, type: type, url: url }], status: status });
-	return await interaction.reply("Presence wurde erfolgreich verändert.");
+	switch (args.name) {
+		case "set":
+			let activity = args[0].options[0].value;
+			let type = args[0].options[1].value;
+			let status = args[0].options[2].value;
+			let url = args[0].options[3].value;
+		
+			await client.user.setPresence({ activities: [{ name: activity, type: type, url: url ? url : "" }], status: status });
+			return await interaction.reply("Presence wurde erfolgreich verändert.");
+			
+		case "get":
+			return await interaction.reply(client.user.presence.activities[0].name);
+	}
 };
 
 module.exports.config = {
