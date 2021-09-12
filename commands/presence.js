@@ -1,6 +1,4 @@
 module.exports.execute = async (client, interaction, args) => {
-	console.log(args);
-
 	switch (args.name) {
 		case "set":
 			let activity = args[0].options[0].value;
