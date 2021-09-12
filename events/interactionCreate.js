@@ -8,10 +8,10 @@ module.exports.execute = async (client, interaction) => {
 	if (!command) return;
 
 	try {
-		await command.execute(interaction);
+		await command.execute(client, interaction, interaction.options.data[0].options);
 	} catch (e) {
 		console.error(e);
-		await interaction.reply({ content: "Es gab einen Fehler beim Ausf�hren dieses Befehls.", ephemeral: true });
+		await interaction.reply({ content: "Es gab einen Fehler beim Ausführen dieses Befehls.", ephemeral: true });
 	}
 
 };
