@@ -33,7 +33,7 @@ process.argv.forEach((arg) => {
 	case "-d":
 	case "--deploy-commands": {
 		// deploys commands on startup
-		const deploy = require("./deploy-commands.js");
+		const deploy = require("./deployCommands.js");
 		deploy.execute();
 		break;
 	}
