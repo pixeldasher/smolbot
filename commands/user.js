@@ -1,4 +1,4 @@
-module.exports.execute = async (interaction) => {
+module.exports.execute = async (client, interaction, args) => {
 
 	await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
 

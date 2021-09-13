@@ -1,31 +1,24 @@
-const fs = require("fs");
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
-const { clientId, guildId, token } = require("./config.json");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const CommandBuilder = require("./commandBuilder.js");
-
-const commands = [];
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+module.exports.build = async (client, commands, command) => {
+	const CommandBuilder = require("./commandBuilder.js");
 
 	if (!command.config.type.length || command.config.type == "CHAT_INPUT") {
-		CommandBuilder.run(commands, command.config);
+		CommandBuilder.run(client, commands, command.config);
 	}
 }
 
-const rest = new REST({ version: "9" }).setToken(token);
+module.exports.submit = async (client, commands) => {
+	const { clientId, guildId, token } = require("./config.json");
+	const { Routes } = require("discord-api-types/v9");
+	const { REST } = require("@discordjs/rest");
+	const rest = new REST({ version: "9" }).setToken(token);
 
-module.exports.execute = async () => {
 	try {
 		await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
+			Routes.applicationGuildCommands(clientId, guildId),	// todo: server independent command submissions
 			{ body: commands },
 		);
 
-		console.log("\x1b[35m%s\x1b[0m%s", "[LOGS] ", `Successfully registered ${commands.length} application commands.`);
+		client.diagnosisHandler("log", `Successfully registered ${commands.length} application commands.`);
 	} catch (error) {
 		console.error(error);
 	}

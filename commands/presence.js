@@ -1,19 +1,13 @@
 module.exports.execute = async (client, interaction, args) => {
-	switch (args.name) {
+	switch (args._subcommand) {
 		case "set":
-			let activity = args[0].options[0].value;
-			let type = args[0].options[1].value;
-			let status = args[0].options[2].value;
-			let url = args[0].options[3].value;
-
-			if (type = "STREAMING" && !url.length) {
+			if (args.type == "STREAMING" && !args.url)
 				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine URL an.", ephemeral: true });
-			}
 
-			await client.user.setPresence({  status: status, activities: [{ type: type, name: activity, url: url ? url : "" }] });
+			await client.user.setPresence({ activities: [{ name: args.name, type: args.type, url: args.url }], status: args.status });
 			return await interaction.reply("Presence wurde erfolgreich verändert.");
-			
 		case "get":
+			// todo: make this an embed lol
 			return await interaction.reply( 
 				"Status: " +client.user.presence.status +
 				", Typ: " + client.user.presence.activities[0].type +
@@ -25,7 +19,7 @@ module.exports.execute = async (client, interaction, args) => {
 
 module.exports.config = {
 	name:			"presence",
-	description:	"Einstellungen rund um die Presence vom smolbot",
+	description:	"Einstellungen rund um die Presence von Meadow",
 	options:		[
 						{
 							"name": "set",
@@ -39,9 +33,9 @@ module.exports.config = {
 									"required": true,
 									"choices": [
 										["Online", "online"],
-										["AFK", "idle"],
+										["Abwesend", "idle"],
 										["Bitte nicht stören", "dnd"],
-										["Offline", "invisible"],
+										// ["Offline (Unsichtbar)", "invisible"],	This works, but completely undermines the use of this command.
 									]
 								},
 								{
@@ -54,7 +48,8 @@ module.exports.config = {
 										["Streamen", "STREAMING"],
 										["Hören", "LISTENING"],
 										["Schauen", "WATCHING"],
-										["Wettbewerb", "COMPETING"],
+										// ["Eigene", "CUSTOM"],		Bots don't actually support custom activities.
+										["Antreten in", "COMPETING"],
 									]
 								},
 								{
@@ -64,10 +59,10 @@ module.exports.config = {
 									"required": true,
 								},
 								{
-									"name": "url",
-									"description": "Insofern du 'Streamen' gewählt hast, bitte lege eine URL fest",
-									"type": 3,
-									"required": false,
+								    "name": "url",
+								    "description": "Insofern du 'Streamen' gewählt hast, bitte lege eine URL fest",
+								    "type": 3,
+								    "required": false,
 								},
 							]
 						},

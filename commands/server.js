@@ -1,4 +1,4 @@
-module.exports.execute = async (interaction) => {
+module.exports.execute = async (client, interaction, args) => {
 
 	await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 
