@@ -10,7 +10,7 @@ module.exports.execute = async (client, interaction, args) => {
 				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine URL an.", ephemeral: true });
 			}
 
-			await client.user.setPresence({ activities: [{ name: activity, type: type, url: url ? url : "" }], status: status });
+			await client.user.setPresence({ activities: [{ type: type, name: activity, url: url ? url : "" }], status: status });
 			return await interaction.reply("Presence wurde erfolgreich verändert.");
 			
 		case "get":
