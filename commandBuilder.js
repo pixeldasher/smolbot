@@ -8,7 +8,6 @@ module.exports.run = async (client, commands, config) => {
 	;
 
 	function recursive(parent, child, type) {
-
 		// Check if there are choices and if the formatting is correct
 		if (child.choices) {
 			if (child.choices.filter(f => f.length != 2).length) {
@@ -17,10 +16,6 @@ module.exports.run = async (client, commands, config) => {
 			if (child.choices.filter(f => typeof f[0] != "string" || typeof f[1] != "string").length) {
 				return client.diagnosisHandler("invalidChoicesFormatting", config.name, parent.name, child.name);
 			}
-		}
-
-		if (parent.type != (1 || 2) && !child.required) {
-			child.required = false;
 		}
 		
 		switch (type) {
