@@ -10,7 +10,7 @@ module.exports.execute = async (client, interaction, args) => {
 				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine URL an.", ephemeral: true });
 			}
 
-			await client.user.setPresence({ activities: [{ type: type, name: activity, url: url ? url : "" }], status: status });
+			await client.user.setPresence({  status: status, activities: [{ type: type, name: activity, url: url ? url : "" }] });
 			return await interaction.reply("Presence wurde erfolgreich verändert.");
 			
 		case "get":
@@ -28,10 +28,16 @@ module.exports.config = {
 							"type": 1,
 							"options": [
 								{
-									"name": "name",
-									"description": "Gebe die Bot-Aktivität an",
+									"name": "status",
+									"description": "Gebe den Bot-Status an",
 									"type": 3,
 									"required": true,
+									"choices": [
+										["Online", "online"],
+										["AFK", "idle"],
+										["Bitte nicht stören", "dnd"],
+										["Offline", "invisible"],
+									]
 								},
 								{
 									"name": "type",
@@ -47,22 +53,16 @@ module.exports.config = {
 									]
 								},
 								{
+									"name": "name",
+									"description": "Gebe die Bot-Aktivität an",
+									"type": 3,
+									"required": true,
+								},
+								{
 									"name": "url",
 									"description": "Insofern du 'Streamen' gewählt hast, bitte lege eine URL fest",
 									"type": 3,
 									"required": false,
-								},
-								{
-									"name": "status",
-									"description": "Gebe den Bot-Status an",
-									"type": 3,
-									"required": true,
-									"choices": [
-										["Online", "online"],
-										["AFK", "idle"],
-										["Bitte nicht stören", "dnd"],
-										["Offline", "invisible"],
-									]
 								},
 							]
 						},
