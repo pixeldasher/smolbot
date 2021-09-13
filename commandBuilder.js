@@ -93,7 +93,7 @@ module.exports.run = async (commands, config) => {
 				});
 				break;
 			case "choice": // CHOICE
-				parent.addChoices(child);				
+				parent.addChoices(child);
 				break;
 		}
 	}

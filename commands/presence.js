@@ -5,7 +5,11 @@ module.exports.execute = async (client, interaction, args) => {
 			let type = args[0].options[1].value;
 			let status = args[0].options[2].value;
 			let url = args[0].options[3].value;
-		
+
+			if (type = "STREAMING" && !url.length) {
+				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine URL an.", ephemeral: true });
+			}
+
 			await client.user.setPresence({ activities: [{ name: activity, type: type, url: url ? url : "" }], status: status });
 			return await interaction.reply("Presence wurde erfolgreich verändert.");
 			
@@ -39,7 +43,6 @@ module.exports.config = {
 										["Streamen", "STREAMING"],
 										["Hören", "LISTENING"],
 										["Schauen", "WATCHING"],
-										["Eigene", "CUSTOM"],
 										["Wettbewerb", "COMPETING"],
 									]
 								},
