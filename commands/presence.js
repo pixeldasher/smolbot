@@ -14,7 +14,12 @@ module.exports.execute = async (client, interaction, args) => {
 			return await interaction.reply("Presence wurde erfolgreich verändert.");
 			
 		case "get":
-			return await interaction.reply(client.user.presence.activities[0].name);
+			return await interaction.reply( 
+				"Status: " +client.user.presence.status +
+				", Typ: " + client.user.presence.activities[0].type +
+				", Name: " + client.user.presence.activities[0].name +
+				(client.user.presence.activities[0].url ? (", URL: " + client.user.presence.activities[0].url) : "")
+			);
 	}
 };
 
