@@ -1,7 +1,5 @@
 module.exports.execute = async (client, lang, interaction, args) => {
-
-	await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
-
+	await interaction.reply(await client.localize(lang, "commands.user.reply", { tag: interaction.user.tag, id: interaction.user.id }));
 };
 
 module.exports.config = {

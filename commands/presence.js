@@ -1,19 +1,14 @@
 module.exports.execute = async (client, lang, interaction, args) => {
 	switch (args._subcommand) {
 		case "set":
-			if (args.type == "STREAMING" && (!args.url || !args.url.startsWith("https://twitch.tv/") || !args.url.startsWith("https://youtube.com/")))
-				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine gültige URL (Twitch oder YouTube Livestream) an.", ephemeral: true });
+			if (args.type == "STREAMING" && (!args.url || (!args.url.startsWith("https://twitch.tv/") && !args.url.startsWith("https://youtube.com/"))))
+				return await interaction.reply({ content: await client.localize(lang, "commands.presence.set.invalidUrl"), ephemeral: true });
 
-			await client.user.setPresence({ activities: [{ name: args.name, type: args.type, url: args.url }], status: args.status });
-			return await interaction.reply("Presence wurde erfolgreich verändert.");
+			await client.user.setPresence({ activities: [{ name: args.name, type: args.type, url: args.url || "" }], status: args.status });
+			return await interaction.reply(await client.localize(lang, "commands.presence.set.success"));
 		case "get":
 			// todo: make this an embed lol
-			return await interaction.reply( 
-				"Status: " +client.user.presence.status +
-				", Typ: " + client.user.presence.activities[0].type +
-				", Name: " + client.user.presence.activities[0].name +
-				(client.user.presence.activities[0].url ? (", URL: " + client.user.presence.activities[0].url) : "")
-			);
+			return await interaction.reply(await client.localize(lang, "commands.presence.get.reply", { status: client.user.presence.status, type: client.user.presence.activities[0].type, name: client.user.presence.activities[0].name, url: client.user.presence.activities[0].url || ""}));
 	}
 };
 

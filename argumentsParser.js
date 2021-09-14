@@ -7,7 +7,7 @@ module.exports.run = async (interaction) => {
 	switch (data.type) {
 		case "SUB_COMMAND":
 			args._subcommand = data.name;
-			data = data.options.length ? data.options : [];
+			data = data.options ? data.options : [];
 			break;
 		case "SUB_COMMAND_GROUP":
 			args._group = data.name;

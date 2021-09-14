@@ -1,12 +1,15 @@
 // define const for late use
 const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
+const LocalizationParser = require("./localizationParser.js");
+const DiagnosisHandler = require("./diagnosisHandler.js")
+const deploy = require("./deployCommands.js");
+let _deploy = false;
 
 // define client with intents
 client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 // function to create new diagnosis collection and to fill it with all externally placed diagnoses
-const DiagnosisHandler = require("./diagnosisHandler.js")
 client.diagnoses = new Collection();
 const diagnosisFiles = fs.readdirSync("./diagnoses").filter(file => file.endsWith(".js"));
 for (const file of diagnosisFiles) {
@@ -31,10 +34,6 @@ try {
 // check for token
 if (!config.token || !config.token.length)
 	return client.diagnosisHandler("missingToken");
-
-// check for deploy
-const deploy = require("./deployCommands.js");
-let _deploy = false;
 
 // for every argument given in cli
 process.argv.forEach((arg) => {
@@ -73,11 +72,18 @@ process.argv.forEach((arg) => {
 });
 
 // localization support
-client.localize = {};
+client.localizedStrings = {};
 const locDirs = fs.readdirSync("./localization").filter(i => fs.statSync("./localization/" + i).isDirectory());
 for (const dir of locDirs) {
 	const string = require(`./localization/${dir}/loc.json`);
-	client.localize[dir] = string;
+	client.localizedStrings[dir] = string;
+};
+client.localize = async (lang, string, args) => {
+	let locString = client.localizedStrings[lang];
+	string.split('.').forEach(i => {			// Translate dot notation to object path
+		locString = locString[i];
+	});
+	return await LocalizationParser.run(locString, args);
 };
 
 // function to create new command collection and to fill it with all externally placed commands
@@ -112,4 +118,4 @@ for (const file of eventFiles) {
 client.login(config.token);
 
 
-// todo: add language support and databases
+// todo: add databases

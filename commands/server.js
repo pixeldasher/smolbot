@@ -1,7 +1,5 @@
 module.exports.execute = async (client, lang, interaction, args) => {
-
-	await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
-
+	await interaction.reply(await client.localize(lang, "commands.server.reply", { name: interaction.guild.name, count: interaction.guild.memberCount }));
 };
 
 module.exports.config = {

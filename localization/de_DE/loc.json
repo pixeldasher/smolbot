@@ -1,7 +1,28 @@
 {
   "commands": {
+    "beep": {
+      "reply": "Boop!"
+    },
+    "blub": {
+      "reply": "Blub!"
+    },
     "ping": {
       "reply": "Pong!"
+    },
+    "presence": {
+      "get": {
+        "reply": "Status: %status, Typ: %type, Name: %name#if#?url#!, URL: <%url>#endif"
+      },
+      "set": {
+        "invalidUrl": "Presence konnte nicht verändert werden! Bitte gebe eine gültige URL (Twitch oder YouTube Livestream) an.",
+        "success": "Presence wurde erfolgreich verändert."
+      }
+    },
+    "server": {
+      "reply": "Servername: %name\nMitgliederzahl: %count"
+    },
+    "user": {
+      "reply": "Dein Tag: %tag\nDeine ID: %id"
     }
   }
 }
