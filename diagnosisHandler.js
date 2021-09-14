@@ -1,5 +1,4 @@
-module.exports.run = async (client, diag, ...args) => {
-	const diagnosis = client.diagnoses.get(diag);
+module.exports.run = async (diagnosis, ...args) => {
     let res = {
         info: "",
         action: "",
@@ -7,7 +6,7 @@ module.exports.run = async (client, diag, ...args) => {
     };
 
 	if (!diagnosis) return;
-	res = await diagnosis.trigger(client, res, ...args);
+	res = await diagnosis.trigger(res, ...args);
 	let mode = [];
 
 	switch (diagnosis.config.type) {
@@ -32,5 +31,5 @@ module.exports.run = async (client, diag, ...args) => {
 		console.log(mode[0], "\n      ", res.solution)
 	}
 
-	return;
+	return diagnosis.config.type == "error";
 };

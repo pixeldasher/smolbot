@@ -1,4 +1,4 @@
-module.exports.trigger = async (client, res, log) => {
+module.exports.trigger = async (res, log) => {
     res.info = log;
 
     return res;

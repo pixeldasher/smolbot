@@ -1,8 +1,8 @@
-module.exports.execute = async (client, interaction, args) => {
+module.exports.execute = async (client, lang, interaction, args) => {
 	switch (args._subcommand) {
 		case "set":
-			if (args.type == "STREAMING" && !args.url)
-				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine URL an.", ephemeral: true });
+			if (args.type == "STREAMING" && (!args.url || !args.url.startsWith("https://twitch.tv/") || !args.url.startsWith("https://youtube.com/")))
+				return await interaction.reply({ content: "Presence konnte nicht verändert werden! Bitte gebe eine gültige URL (Twitch oder YouTube Livestream) an.", ephemeral: true });
 
 			await client.user.setPresence({ activities: [{ name: args.name, type: args.type, url: args.url }], status: args.status });
 			return await interaction.reply("Presence wurde erfolgreich verändert.");

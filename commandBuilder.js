@@ -9,14 +9,9 @@ module.exports.run = async (client, commands, config) => {
 
 	function recursive(parent, child, type) {
 		// Check if there are choices and if the formatting is correct
-		if (child.choices) {
-			if (child.choices.filter(f => f.length != 2).length) {
+		if (child.choices)
+			if (child.choices.filter(f => f.length != 2).length || child.choices.filter(f => typeof f[0] != "string" || typeof f[1] != "string").length)
 				return client.diagnosisHandler("invalidChoicesFormatting", config.name, parent.name, child.name);
-			}
-			if (child.choices.filter(f => typeof f[0] != "string" || typeof f[1] != "string").length) {
-				return client.diagnosisHandler("invalidChoicesFormatting", config.name, parent.name, child.name);
-			}
-		}
 		
 		switch (type) {
 			case 1: // SUB_COMMAND
@@ -44,7 +39,7 @@ module.exports.run = async (client, commands, config) => {
 					if (child.options)
 						child.options.forEach(grandchild => {
 							if (grandchild.type != 1)
-								return client.diagnosisHandler("invalidSubcommandType", parent, child, grandchild);
+								return client.diagnosisHandler("invalidSubcommandType", parent.name, child.name, grandchild.name);
 								
 							recursive(i, grandchild, grandchild.type)
 						});

@@ -1,0 +1,7 @@
+{
+  "commands": {
+    "ping": {
+      "reply": "Pong!"
+    }
+  }
+}

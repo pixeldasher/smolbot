@@ -1,6 +1,6 @@
-module.exports.execute = async (client, interaction, args) => {
+module.exports.execute = async (client, lang, interaction, args) => {
 
-	await interaction.reply("Pong!");
+	await interaction.reply(client.localize[lang].commands.ping.reply);
 
 };
 
