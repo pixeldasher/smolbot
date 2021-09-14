@@ -1,9 +1,9 @@
 // define const for late use
 const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
-const LocalizationParser = require("./localizationParser.js");
-const DiagnosisHandler = require("./diagnosisHandler.js")
-const deploy = require("./deployCommands.js");
+const LocalizationParser = require("./toolset/localizationParser.js");
+const DiagnosisHandler = require("./toolset/diagnosisHandler.js")
+const deploy = require("./toolset/deployCommands.js");
 let _deploy = false;
 
 // define client with intents

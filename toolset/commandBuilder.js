@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports.run = async (client, commands, config) => {
-	
 	var data = new SlashCommandBuilder()
 		.setName(config.name)
 		.setDescription(config.description)
@@ -113,5 +112,4 @@ module.exports.run = async (client, commands, config) => {
 
 	commands.push(data.toJSON());
 	return;
-
 };

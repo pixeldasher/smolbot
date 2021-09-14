@@ -6,7 +6,7 @@ module.exports.execute = async (client, interaction) => {
 	if (!command) return;
 
 	try {
-		const ArgumentsParser = require("../argumentsParser.js");
+		const ArgumentsParser = require("../toolset/argumentsParser.js");
 		let lang = "de_DE"; // todo: add database support to not hardcode this xdddd
 		await command.execute(client, lang, interaction, await ArgumentsParser.run(interaction));
 	} catch (e) {
