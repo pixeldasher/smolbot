@@ -6,3 +6,5 @@ Options:
     -h, --help                  Shows this help page
     -a, --author                Displays the author's name(s)
 
+Version:
+    meadow v0.0.6
