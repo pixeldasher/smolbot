@@ -23,6 +23,9 @@
     },
     "user": {
       "reply": "Dein Tag: %tag\nDeine ID: %id"
+    },
+    "xp": {
+      "reply": "Du hast zurzeit %xp XP!"
     }
   }
 }
