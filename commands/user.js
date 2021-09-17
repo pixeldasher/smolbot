@@ -3,8 +3,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.execute = async (client, lang, interaction, args) => {
 
-	let userObject = args.user || interaction.member.user;
-	let memberObject = args.user ? interaction.guild.members.cache.get(args.user.id) : interaction.member;
+	const memberObject = interaction.guild.members.cache.get(args.user) || interaction.member;
+	const userObject = memberObject.user || interaction.member.user;
 
 	const embed = new MessageEmbed()
 		.setAuthor(memberObject.nickname ? `${memberObject.nickname} + (${userObject.username})` : userObject.username, userObject.displayAvatarURL())
