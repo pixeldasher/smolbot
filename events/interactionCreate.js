@@ -13,7 +13,7 @@ module.exports.execute = async (client, interaction) => {
 		const args = await ArgumentsParser.run(interaction);
 
 		// Check if user has permissions to execute command/subcommandgroup/subcommand
-		if (!interaction.member.permissions.has(command.config?.permissions) || !interaction.member.permissions.has(args._subcommandGroup?.permissions) || !interaction.member.permissions.has(args._subcommand?.permissions))
+		if ((command.config?.permissions && !interaction.member.permissions.has(command.config?.permissions)) || (args._subcommandGroup?.permissions && !interaction.member.permissions.has(args._subcommandGroup?.permissions)) || (args._subcommand?.permissions && !interaction.member.permissions.has(args._subcommand?.permissions)))
 			return await interaction.reply({ content: await client.localize(lang, "events.interactionCreate.missingPermissions"), ephemeral: true });
 				
 		await command.execute(client, lang, interaction, args);
