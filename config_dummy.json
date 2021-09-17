@@ -1,5 +1,10 @@
 {
-	"clientId": "bot id",
-	"guildId": "server id",
-	"token": "bot token"
+		"clientId": "bot id",
+		"guildId": "server id",
+		"token": "bot token",
+		"database": {
+				"name": "database",
+				"user": "user",
+				"password": "password"
+		}
 }

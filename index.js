@@ -3,11 +3,12 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const LocalizationParser = require("./toolset/localizationParser.js");
 const DiagnosisHandler = require("./toolset/diagnosisHandler.js")
+const DatabaseHandler = require("./toolset/databaseHandler.js");
 const deploy = require("./toolset/deployCommands.js");
 let _deploy = false;
 
 // define client with intents
-client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
 // function to create new diagnosis collection and to fill it with all externally placed diagnoses
 client.diagnoses = new Collection();
@@ -113,6 +114,18 @@ for (const file of eventFiles) {
 		client.on(event.config.name, (...args) => event.execute(client, ...args));
 	};
 };
+
+// initialize databases
+dbInit = async () => {
+	client = await DatabaseHandler.init(client);
+	return client;
+}
+dbInit();
+
+// random number generator
+client.rng = (min, max) => {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 // starts this bot
 client.login(config.token);

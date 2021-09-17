@@ -4,3 +4,4 @@ config.json
 package-lock.json
 /.vs
 .i18n-editor-metadata
+meadowdb.sqlite

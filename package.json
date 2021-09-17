@@ -1,18 +1,17 @@
 {
-  "name": "smolbot",
-  "version": "0.0.5",
-  "description": "smolbot made by pixeldasher",
-  "main": "smolbot.js",
+  "name": "meadowbot",
+  "version": "0.0.6",
+  "description": "Meadow Bot by pixeldasher and nitro",
+  "main": "index.js",
   "keywords": [],
   "author": "pixeldasher",
-  "license": "ISC",
+  "license": "AGPLv3",
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.23.1",
-    "discord.js": "^13.1.0"
-  },
-  "devDependencies": {
-    "eslint": "^7.32.0"
+    "discord.js": "^13.1.0",
+    "sequelize": "^6.6.5",
+    "sqlite3": "^4.2.0"
   }
 }
