@@ -1,3 +1,5 @@
+const { Permissions } = require('discord.js');
+
 module.exports.execute = async (client, lang, interaction, args) => {
 	switch (args._subcommand) {
 		case "set":
@@ -59,7 +61,8 @@ module.exports.config = {
 								    "type": 3,
 								    "required": false,
 								},
-							]
+			],
+							"permissions": [Permissions.FLAGS.ADMINISTRATOR]
 						},
 						{
 							"name": "get",

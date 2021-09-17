@@ -5,13 +5,21 @@ module.exports.execute = async (client, interaction) => {
 	const command = client.commands.get(interaction.commandName);
 	if (!command) return;
 
+	const guildObject = await client.db_config_guild.get(interaction.guild.id, true);
+	const lang = guildObject.lang;
+
 	try {
 		const ArgumentsParser = require("../toolset/argumentsParser.js");
-		let lang = "de_DE"; // todo: add database support to not hardcode this xdddd
-		await command.execute(client, lang, interaction, await ArgumentsParser.run(interaction));
+		const args = await ArgumentsParser.run(interaction);
+
+		// Check if user has permissions to execute command/subcommandgroup/subcommand
+		if (!interaction.member.permissions.has(command.config?.permissions) || !interaction.member.permissions.has(args._subcommandGroup?.permissions) || !interaction.member.permissions.has(args._subcommand?.permissions))
+			return await interaction.reply({ content: await client.localize(lang, "events.interactionCreate.missingPermissions"), ephemeral: true });
+				
+		await command.execute(client, lang, interaction, args);
 	} catch (e) {
 		console.error(e);
-		await interaction.reply({ content: "Es gab einen Fehler beim Ausführen dieses Befehls.", ephemeral: true });
+		await interaction.reply({ content: await client.localize(lang, "events.interactionCreate.catch"), ephemeral: true });
 	}
 };
 

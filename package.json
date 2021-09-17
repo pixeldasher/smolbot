@@ -11,6 +11,7 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0",
+    "moment": "^2.29.1",
     "sequelize": "^6.6.5",
     "sqlite3": "^4.2.0"
   }

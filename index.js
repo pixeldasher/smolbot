@@ -1,6 +1,6 @@
 // define const for late use
 const fs = require("fs");
-const { Client, Collection, Intents } = require("discord.js");
+const { Client, Collection, Intents, Permissions } = require("discord.js");
 const LocalizationParser = require("./toolset/localizationParser.js");
 const DiagnosisHandler = require("./toolset/diagnosisHandler.js")
 const DatabaseHandler = require("./toolset/databaseHandler.js");
@@ -8,7 +8,7 @@ const deploy = require("./toolset/deployCommands.js");
 let _deploy = false;
 
 // define client with intents
-client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES] });
 
 // function to create new diagnosis collection and to fill it with all externally placed diagnoses
 client.diagnoses = new Collection();
@@ -125,6 +125,14 @@ dbInit();
 // random number generator
 client.rng = (min, max) => {
 	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+// userstatus enum
+client.userStatus = {
+	online: "Online",
+	idle: "Abwesend",
+	dnd: "Bitte nicht stören",
+	offline: "Offline"
 }
 
 // starts this bot

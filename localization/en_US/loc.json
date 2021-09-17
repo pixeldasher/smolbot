@@ -6,6 +6,10 @@
     "blub": {
       "reply": "Blub!"
     },
+    "config": {
+      "invalidLang": "That is not a valid language string.",
+      "reply": "Local language settings changed successfully."
+    },
     "ping": {
       "reply": "Pong!"
     },
@@ -22,10 +26,24 @@
       "reply": "Server name: %name\nTotal members: %count"
     },
     "user": {
+      "embed": {
+        "creation": "Creation date",
+        "footer": "User information from %tag",
+        "id": "User ID",
+        "joined": "Join date",
+        "status": "Status",
+        "tag": "Discord Tag"
+      },
       "reply": "Your tag: %tag\nYour ID: %id"
     },
     "xp": {
       "reply": "You currently have %xp XP!"
+    }
+  },
+  "events": {
+    "interactionCreate": {
+      "catch": "An error occurred while trying to execute this command.",
+      "missingPermissions": "You don't have the needed permissions to execute this command."
     }
   }
 }

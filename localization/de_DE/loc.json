@@ -6,6 +6,10 @@
     "blub": {
       "reply": "Blub!"
     },
+    "config": {
+      "invalidLang": "Das ist kein gültiger Sprachenstring.",
+      "reply": "Lokale Spracheinstellungen wurden erfolgreich geändert."
+    },
     "ping": {
       "reply": "Pong!"
     },
@@ -22,10 +26,24 @@
       "reply": "Servername: %name\nMitgliederzahl: %count"
     },
     "user": {
+      "embed": {
+        "creation": "Erstellungsdatum",
+        "footer": "Nutzerinformationen von %tag",
+        "id": "Nutzer ID",
+        "joined": "Beitrittsdatum",
+        "status": "Status",
+        "tag": "Discord Tag"
+      },
       "reply": "Dein Tag: %tag\nDeine ID: %id"
     },
     "xp": {
       "reply": "Du hast zurzeit %xp XP!"
+    }
+  },
+  "events": {
+    "interactionCreate": {
+      "catch": "Es gab einen Fehler beim Ausführen dieses Befehls.",
+      "missingPermissions": "Du besitzt nicht die nötigen Rechte um diesen Befehl auszuführen."
     }
   }
 }
