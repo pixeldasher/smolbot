@@ -3,7 +3,7 @@ const { Permissions } = require('discord.js');
 module.exports.execute = async (client, lang, interaction, args) => {
 	if (args.lang) {
 		if (!client.localizedStrings[args.lang])
-			return await interaction.reply(await client.localize(lang, "commands.config.invalidLang"));
+			return await interaction.reply({ content: await client.localize(lang, "commands.config.invalidLang"), ephemeral: true });
 		const guildObject = await client.db_config_guild.get(interaction.guild.id, true);
 		await guildObject.update({ lang: args.lang });
 		return await interaction.reply(await client.localize(args.lang, "commands.config.reply"));
