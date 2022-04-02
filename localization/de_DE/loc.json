@@ -22,6 +22,15 @@
         "success": "Presence wurde erfolgreich verändert."
       }
     },
+    "pronouns": {
+      "get": {
+        "reply": "%user bevorzugt folgende Pronomen:\n%pronouns"
+      },
+      "set": {
+        "reply": "Pronomen wurde erfolgreich verändert.",
+        "tooManyArguments": "Zu viele Argumente ausgewählt! Bitte wähle entweder `add` ODER `remove`."
+      }
+    },
     "server": {
       "reply": "Servername: %name\nMitgliederzahl: %count"
     },

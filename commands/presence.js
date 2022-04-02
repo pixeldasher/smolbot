@@ -16,48 +16,48 @@ module.exports.execute = async (client, lang, interaction, args) => {
 
 module.exports.config = {
 	name:			"presence",
-	description:	"Einstellungen rund um die Presence von Meadow",
+	description:	"Presence settings toolkit",
 	options:		[
 						{
 							"name": "set",
-							"description": "Verändere die Presence Einstellung",
+							"description": "Edit the presence settings",
 							"type": 1,
 							"options": [
 								{
 									"name": "status",
-									"description": "Gebe den Bot-Status an",
+									"description": "Specify the status",
 									"type": 3,
 									"required": true,
 									"choices": [
 										["Online", "online"],
-										["Abwesend", "idle"],
-										["Bitte nicht stören", "dnd"],
+										["Idle", "idle"],
+										["Do not disturb", "dnd"],
 										// ["Offline (Unsichtbar)", "invisible"],	This works, but completely undermines the use of this command.
 									]
 								},
 								{
 									"name": "type",
-									"description": "Gebe die Bot-Aktivitäten-Art an",
+									"description": "Specify the activity",
 									"type": 3,
 									"required": true,
 									"choices": [
-										["Spielen", "PLAYING"],
-										["Streamen", "STREAMING"],
-										["Hören", "LISTENING"],
-										["Schauen", "WATCHING"],
+										["Playing", "PLAYING"],
+										["Streaming", "STREAMING"],
+										["Listening", "LISTENING"],
+										["Watching", "WATCHING"],
 										// ["Eigene", "CUSTOM"],		Bots don't actually support custom activities.
-										["Antreten in", "COMPETING"],
+										["Competing", "COMPETING"],
 									]
 								},
 								{
 									"name": "name",
-									"description": "Gebe die Bot-Aktivität an",
+									"description": "Specify the name",
 									"type": 3,
 									"required": true,
 								},
 								{
 								    "name": "url",
-								    "description": "Insofern du 'Streamen' gewählt hast, bitte lege eine URL fest",
+								    "description": "Upon choosing 'Streaming', specify a YouTube or Twitch URL",
 								    "type": 3,
 								    "required": false,
 								},
@@ -66,7 +66,7 @@ module.exports.config = {
 						},
 						{
 							"name": "get",
-							"description": "Zeigt die momentane Einstellung an",
+							"description": "Displays the current presence settings",
 							"type": 1,
 						},
 					],

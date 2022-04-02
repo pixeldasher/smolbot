@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.execute = async (client, lang, interaction, args) => {
 
-	const memberObject = interaction.guild.members.cache.get(args.user) || interaction.member;
+	const memberObject = await interaction.guild.members.cache.get(args.user) || interaction.member;
 	const userObject = memberObject.user || interaction.member.user;
 
 	const embed = new MessageEmbed()

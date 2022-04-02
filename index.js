@@ -131,7 +131,7 @@ client.rng = (min, max) => {
 client.userStatus = {
 	online: "Online",
 	idle: "Abwesend",
-	dnd: "Bitte nicht stören",
+	dnd: "Bitte nicht stÃ¶ren",
 	offline: "Offline"
 }
 
