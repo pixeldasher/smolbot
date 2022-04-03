@@ -65,7 +65,7 @@ module.exports.execute = async (client, lang, interaction, args) => {
 				if (r.name.includes("/") || r.name == "Any")
 					return r.name;
 			})
-			return await interaction.reply(({ content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user.tag, pronouns: pronounRoles.join(", ") }), ephemeral: true }));
+			return await interaction.reply(({ content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user.tag, pronouns: pronounRoles.join(", ") }) }));
 	}
 };
 
