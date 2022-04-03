@@ -2,6 +2,7 @@ module.exports.execute = async (client, lang, interaction, args) => {
 	const memberObject = await interaction.guild.members.cache.get(args.user) || interaction.member;
 	switch (args._subcommand) {
 		case "set":
+			// todo: make this not hardcoded holy shit this is so bad oh my god
 			let roleId = "";
 			if (args.add && args.remove) return await interaction.reply({ content: await client.localize(lang, "commands.presence.set.tooManyArguments"), ephemeral: true })
 			else if (args.add) {
