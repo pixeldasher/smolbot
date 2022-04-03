@@ -34,6 +34,9 @@
     "server": {
       "reply": "Servername: %name\nMitgliederzahl: %count"
     },
+    "source": {
+      "reply": "https://github.com/pixeldasher/smolbot"
+    },
     "user": {
       "embed": {
         "creation": "Erstellungsdatum",

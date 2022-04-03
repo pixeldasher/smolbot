@@ -61,11 +61,18 @@ module.exports.execute = async (client, lang, interaction, args) => {
 			return await interaction.reply({ content: await client.localize(lang, "commands.pronouns.set.reply"), ephemeral: true});
 		case "get":
 			// todo: make this an embed lol
-			const pronounRoles = memberObject.roles.cache.filter(r => {
-				if (r.name.includes("/") || r.name == "Any")
-					return r.name;
+			let pronounArray = [];
+			memberObject.roles.cache.filter(r => {
+				if (r.name.includes("/") || r.name == "Any") {
+					pronounArray.push("`" + r.name + "`");
+				}
 			})
-			return await interaction.reply(({ content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user.tag, pronouns: pronounRoles.join(", ") }) }));
+			return await interaction.reply(
+				({
+					content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user, pronouns: pronounArray.join(", ") }),
+					"allowedMentions": { "users": [] }
+				})
+			);
 	}
 };
 
