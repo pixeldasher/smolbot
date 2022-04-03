@@ -58,17 +58,15 @@ module.exports.execute = async (client, lang, interaction, args) => {
 					await client.diagnosisHandler("log", `An error occurred while issuing Pronouns: User doesn't have specified roles.`);
 				}
 			}
-			return await interaction.reply(await client.localize(lang, "commands.pronouns.set.reply"));
+			return await interaction.reply({ content: await client.localize(lang, "commands.pronouns.set.reply"), ephemeral: true});
 		case "get":
 			// todo: make this an embed lol
 			const pronounRoles = memberObject.roles.cache.filter(r => {
 				if (r.name.includes("/") || r.name == "Any")
 					return r.name;
 			})
-			return await interaction.reply(await client.localize(lang, "commands.presence.get.reply",  { user: memberObject.user.tag, pronouns: pronounRoles.join(", ") }));
+			return await interaction.reply(({ content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user.tag, pronouns: pronounRoles.join(", ") }), ephemeral: true }));
 	}
-	const globalUser = await client.db_global.get(interaction.member.id, true)
-	await interaction.reply(await client.localize(lang, "commands.pronouns.set.reply", { xp: globalUser.xp }));
 };
 
 module.exports.config = {
@@ -90,7 +88,6 @@ module.exports.config = {
 						["She/Her", "she"],
 						["They/Them", "they"],
 						["Any", "any"],
-						// ["Offline (Unsichtbar)", "invisible"],	This works, but completely undermines the use of this command.
 					]
 				},
 				{
@@ -104,7 +101,6 @@ module.exports.config = {
 						["They/Them", "they"],
 						["Any", "any"],
 						["Remove All", "all"],
-						// ["Offline (Unsichtbar)", "invisible"],	This works, but completely undermines the use of this command.
 					]
 				},
 			]
