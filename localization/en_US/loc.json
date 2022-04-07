@@ -23,13 +23,9 @@
       }
     },
     "pronouns": {
-      "get": {
-        "reply": "%user prefers the following pronouns:\n%pronouns"
-      },
-      "set": {
-        "reply": "Pronouns have been updated successfully.",
-        "tooManyArguments": "Too many arguments selected! Please only pick `add` OR `remove`."
-      }
+      "noSelection": "No pronouns selected.",
+      "selection": "Select your prefered pronouns.",
+      "success": "Pronouns were successfully updated."
     },
     "server": {
       "reply": "Server name: %name\nTotal members: %count"
@@ -55,7 +51,8 @@
   "events": {
     "interactionCreate": {
       "catch": "An error occurred while trying to execute this command.",
-      "missingPermissions": "You don't have the needed permissions to execute this command."
+      "missingPermissions": "You don't have the needed permissions to execute this command.",
+      "noGuild": "I'm not available in direct messages!"
     }
   }
 }

@@ -1,131 +1,94 @@
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
+
+let menuOptions = [
+	{
+		label: 'He/Him',
+		value: '897852262691524629',
+		default: false,
+	},
+	{
+		label: 'She/Her',
+		value: '897852338868461568',
+		default: false,
+	},
+	{
+		label: 'They/Them',
+		value: '897852361496739921',
+		default: false,
+	},
+	{
+		label: 'Any',
+		value: '897911759342551090',
+		default: false,
+	}
+]
+
 module.exports.execute = async (client, lang, interaction, args) => {
-	const memberObject = await interaction.guild.members.cache.get(args.user) || interaction.member;
-	switch (args._subcommand) {
-		case "set":
-			// todo: make this not hardcoded holy shit this is so bad oh my god
-			let roleId = "";
-			if (args.add && args.remove) return await interaction.reply({ content: await client.localize(lang, "commands.presence.set.tooManyArguments"), ephemeral: true })
-			else if (args.add) {
-				switch (args.add) {
-					case "he":
-						roleId = "897852262691524629";
-						break;
-					case "she":
-						roleId = "897852338868461568";
-						break;
-					case "they":
-						roleId = "897852361496739921";
-						break;
-					case "any":
-						roleId = "897911759342551090";
-						break;
+	menuOptions.forEach(m => {
+		m.default = interaction.member.roles.cache.some(r => r.id == m.value);
+	})
+
+	const row = new MessageActionRow()
+		.addComponents(
+			new MessageSelectMenu()
+				.setCustomId(this.config.name + '.select')
+				.setPlaceholder(await client.localize(lang, "commands.pronouns.noSelection"))
+				.setMinValues(0)
+				.setMaxValues(4)
+				.setOptions(menuOptions),
+		);
+
+	return await interaction.reply({
+		content: await client.localize(lang, "commands.pronouns.selection"),
+		components: [row],
+		ephemeral: true,
+	});
+};
+
+module.exports.menu = {
+	select: async (client, lang, interaction, args) => {
+		menuOptions.forEach(m => {
+			m.default = interaction.values.includes(m.value);
+			try {
+				if (interaction.values.includes(m.value)) {
+					interaction.member.roles.add(m.value);
+				} else {
+					interaction.member.roles.remove(m.value);
 				}
-				const roleObject = await interaction.guild.roles.cache.find(r => r.id === roleId);
-				try {
-					await memberObject.roles.add(roleObject)
-				} catch (e) {
-					await client.diagnosisHandler("log", `An error occurred while issuing Pronouns: User already has specified roles.`);
-				}
-			} else if (args.remove) {
-				let roleArray = [];
-				let roleObject = null;
-				switch (args.remove) {
-					case "he":
-						roleId = "897852262691524629";
-						break;
-					case "she":
-						roleId = "897852338868461568";
-						break;
-					case "they":
-						roleId = "897852361496739921";
-						break;
-					case "any":
-						roleId = "897911759342551090";
-						break;
-					case "all":
-						roleArray.push(await interaction.guild.roles.cache.find(r => r.id === "897852262691524629"));
-						roleArray.push(await interaction.guild.roles.cache.find(r => r.id === "897852338868461568"));
-						roleArray.push(await interaction.guild.roles.cache.find(r => r.id === "897852361496739921"));
-						roleArray.push(await interaction.guild.roles.cache.find(r => r.id === "897911759342551090"));
-						roleId = all;
-						break;
-				}
-				if (roleId != "all") {
-					roleObject = await interaction.guild.roles.cache.find(r => r.id == roleId);
-				}
-				try {
-					await memberObject.roles.remove(roleObject || roleArray)
-				} catch (e) {
-					await client.diagnosisHandler("log", `An error occurred while issuing Pronouns: User doesn't have specified roles.`);
-				}
+			} catch (e) {
+				console.log(e);
 			}
-			return await interaction.reply({ content: await client.localize(lang, "commands.pronouns.set.reply"), ephemeral: true});
-		case "get":
-			// todo: make this an embed lol
-			let pronounArray = [];
-			memberObject.roles.cache.filter(r => {
-				if (r.name.includes("/") || r.name == "Any") {
-					pronounArray.push("`" + r.name + "`");
-				}
-			})
-			return await interaction.reply(
-				({
-					content: await client.localize(lang, "commands.pronouns.get.reply", { user: memberObject.user, pronouns: pronounArray.join(", ") }),
-					"allowedMentions": { "users": [] }
-				})
+		})
+
+		const row = new MessageActionRow()
+			.addComponents(
+				new MessageSelectMenu()
+					.setCustomId(this.config.name + '.select')
+					.setPlaceholder(await client.localize(lang, "commands.pronouns.noSelection"))
+					.setMinValues(0)
+					.setMaxValues(4)
+					.setOptions(menuOptions)
+					.setDisabled(true)
 			);
+
+		await interaction.update({
+			content: await client.localize(lang, "commands.pronouns.success"),
+			components: [row],
+			ephemeral: true,
+		});
+		await wait(2500);
+		return await interaction.editReply({
+			content: await client.localize(lang, "commands.pronouns.success"),
+			components: [],
+			ephemeral: true,
+		});
 	}
 };
 
 module.exports.config = {
 	name:			"pronouns",
-	description:	"Set or get user pronouns!",
-	options:		[
-		{
-			"name": "set",
-			"description": "Update your pronouns",
-			"type": 1,
-			"options": [
-				{
-					"name": "add",
-					"description": "Specify the pronoun",
-					"type": 3,
-					"required": false,
-					"choices": [
-						["He/Him", "he"],
-						["She/Her", "she"],
-						["They/Them", "they"],
-						["Any", "any"],
-					]
-				},
-				{
-					"name": "remove",
-					"description": "Specify the pronoun",
-					"type": 3,
-					"required": false,
-					"choices": [
-						["He/Him", "he"],
-						["She/Her", "she"],
-						["They/Them", "they"],
-						["Any", "any"],
-						["Remove All", "all"],
-					]
-				},
-			]
-		},
-		{
-			"name": "get",
-			"description": "Displays a User's pronouns",
-			"type": 1,
-			"options": [
-				{
-					"name": "user",
-					"description": "Specify a User",
-					"type": 6,
-					"required": false,
-				},
-			],
-		},
-	],
-	type:			"",	// default: CHAT_INPUT => Slash command,    USER => right-click user,    MESSAGE => right-click message
+	description:	"Select some pronouns!",
+	options:		[],	// todo
+	type:			"CHAT_INPUT",	// default: CHAT_INPUT => Slash command,    USER => right-click user,    MESSAGE => right-click message
 };

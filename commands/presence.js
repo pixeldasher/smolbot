@@ -7,7 +7,7 @@ module.exports.execute = async (client, lang, interaction, args) => {
 				return await interaction.reply({ content: await client.localize(lang, "commands.presence.set.invalidUrl"), ephemeral: true });
 
 			await client.user.setPresence({ activities: [{ name: args.name, type: args.type, url: args.url || "" }], status: args.status });
-			return await interaction.reply(await client.localize(lang, "commands.presence.set.success"));
+			return await interaction.reply({ content: await client.localize(lang, "commands.presence.set.success"), ephemeral: true });
 		case "get":
 			// todo: make this an embed lol
 			return await interaction.reply(await client.localize(lang, "commands.presence.get.reply", { status: client.user.presence.status, type: client.user.presence.activities[0].type, name: client.user.presence.activities[0].name, url: client.user.presence.activities[0].url || ""}));

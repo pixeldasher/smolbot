@@ -1,5 +1,5 @@
 module.exports.run = async (interaction) => {
-	if (!interaction.options.data.length) return [];
+	if (!interaction.options?.data.length) return [];
 
 	let args = {};
 	let data = interaction.options.data[0];

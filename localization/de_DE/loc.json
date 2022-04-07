@@ -23,13 +23,9 @@
       }
     },
     "pronouns": {
-      "get": {
-        "reply": "%user bevorzugt folgende Pronomen:\n%pronouns"
-      },
-      "set": {
-        "reply": "Pronomen wurde erfolgreich verändert.",
-        "tooManyArguments": "Zu viele Argumente ausgewählt! Bitte wähle entweder `add` ODER `remove`."
-      }
+      "noSelection": "Keine Pronomen ausgewählt.",
+      "selection": "Wähle deine gewünschten Pronomen.",
+      "success": "Pronomen erfolgreich aktualisiert."
     },
     "server": {
       "reply": "Servername: %name\nMitgliederzahl: %count"
@@ -55,7 +51,8 @@
   "events": {
     "interactionCreate": {
       "catch": "Es gab einen Fehler beim Ausführen dieses Befehls.",
-      "missingPermissions": "Du besitzt nicht die nötigen Rechte um diesen Befehl auszuführen."
+      "missingPermissions": "Du besitzt nicht die nötigen Rechte um diesen Befehl auszuführen.",
+      "noGuild":  "Ich bin nicht in Privatchats erreichbar!"
     }
   }
 }
