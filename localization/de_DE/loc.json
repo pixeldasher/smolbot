@@ -44,6 +44,10 @@
       },
       "reply": "Dein Tag: %tag\nDeine ID: %id"
     },
+    "unlock": {
+      "completed": "Du wurdest bereits freigeschalten.",
+      "reply": "Du wurdest freigeschaltet, viel Spaß!"
+    },
     "xp": {
       "reply": "Du hast zurzeit %xp XP!"
     }

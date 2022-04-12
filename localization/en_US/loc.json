@@ -44,6 +44,10 @@
       },
       "reply": "Your tag: %tag\nYour ID: %id"
     },
+    "unlock": {
+      "completed": "You have already been unlocked.",
+      "reply": "You have been unlocked, have fun!"
+    },
     "xp": {
       "reply": "You currently have %xp XP!"
     }
